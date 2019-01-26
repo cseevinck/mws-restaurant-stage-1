@@ -12,16 +12,16 @@ function startComboBox() {
     var VK_UP = 38;
     var VK_RIGHT = 39;
     var VK_DOWN = 40;
-
-    var LAST_ID = 0;
+    var LAST_ID = [];
+    var lastIdMod = [];
 
     /**
      * Generate a unique DOM ID.
      * @return {string}
      */
-    function nextId() {
-        var id = ':' + LAST_ID;
-        LAST_ID++;
+    function nextId(index) {
+        var id = lastIdMod[index] + LAST_ID[index];
+        LAST_ID[index]++;
         return id;
     }
 
@@ -34,10 +34,10 @@ function startComboBox() {
      * @param {Element} listEl The listbox element to associate with this text field; also decorates
      *     it with the `ListBox` pattern.
      */
-    function ComboBox(el, listEl) {
+    function ComboBox(boxIndex, el, listEl) {
         this.el = el;
-        this.listbox = new ListBox(listEl, this);
-        listEl.id = nextId();
+        this.listbox = new ListBox(boxIndex, listEl, this);
+        listEl.id = nextId(boxIndex);
 
         this.el.addEventListener('focus', this.handleFocus.bind(this), true);
         this.el.addEventListener('blur', this.handleBlur.bind(this), true);
@@ -121,13 +121,13 @@ function startComboBox() {
      * @param {Element} el The element to decorate as a listbox.
      * @param {Textbox} textbox The textbox which controls this listbox in a combobox pattern.
      */
-    function ListBox(el, textbox) {
+    function ListBox(boxIndex, el, textbox) {
         this.el = el;
         this.textbox = textbox;
         this.items = Array.prototype.slice.call(el.querySelectorAll('[role=option]'));
         for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
-            item.id = nextId();
+            item.id = nextId(boxIndex);
 
             item.addEventListener('mouseover', this.handleHoverOnItem.bind(this));
             item.addEventListener('mousedown', this.handleClickOnItem.bind(this), true);
@@ -244,9 +244,15 @@ function startComboBox() {
             this.textbox.setActiveDescendant(newActive);
         }
     };
+    // let keepGoing = true;
 
-    var input = document.querySelector('input[type=text]');
-    var listbox = document.querySelector('[role=listbox]');
 
-    new ComboBox(input, listbox);
+    var inputs = document.querySelectorAll('input[type=text]');
+    var listboxes = document.querySelectorAll('[role=listbox]');
+
+    for (let i = 0; i <= listboxes.length - 1; i++) {
+        LAST_ID.push(0);
+        lastIdMod.push(':' + (i + 1) + ':'); // different id prefixes for each cpntrol
+        new ComboBox(i, inputs[i], listboxes[i]);
+    }
 }
