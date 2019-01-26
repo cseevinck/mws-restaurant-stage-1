@@ -31,13 +31,49 @@ fetchNeighborhoods = () => {
  * Set neighborhoods HTML.
  */
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
+    // old code
     const select = document.getElementById('neighborhoods-select');
     neighborhoods.forEach(neighborhood => {
         const option = document.createElement('option');
+        option.setAttribute('aria-label', neighborhood);
+        option.role = "alert";
         option.innerHTML = neighborhood;
         option.value = neighborhood;
         select.append(option);
+
+
     });
+    // new code
+    // const selector = document.getElementById('neighborhoods-selector');
+    // const input = document.getElementById('neighborhoods-input');
+    // get the parent of the first li element
+    // const input = document.getElementById('first-neighborhood-div');
+    const parentUl = document.getElementById('neighborhoods-selector');
+    // console.log('parentUl:', parentUl);
+    let i = 0;
+    let firstLi = parentUl.firstElementChild;
+    // console.log('firstchild li:', firstLi);
+    neighborhoods.forEach(neighborhood => {
+        // li role = "option" > Coffee < /li>
+        const li = document.createElement('li');
+        li.setAttribute("role", "option");
+        li.setAttribute("id", ":" + ++i);
+        li.innerHTML = neighborhood;
+        // console.log('li just inserted:', li);
+        parentUl.appendChild(li);
+        let aa = li.parentElement;
+        // console.log('parent of li just insterted:', aa);
+    });
+    // put id into combobox div element which is parent of ul element
+    document.getElementById('neighborhoods-selector').parentElement.setAttribute("id", ":" + ++i);
+    // selector.parentElement.setAttribute("id", ":" + ++i);
+    // let aa = document.getElementById('neighborhoods-selector').firstElementChild;
+
+    // debugger;
+    // put the size of the list in to the input element
+    // const input = document.getElementById('neighborhoods-input');
+    // input.setAttribute("size", ":" + ++i);
+    // node.appendChild(textnode);
 }
 
 /**
@@ -77,14 +113,30 @@ initMap = () => {
             zoom: 12,
             scrollWheelZoom: false
         });
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
+        let tile_layer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
             mapboxToken: 'pk.eyJ1IjoiY3NlZXZpbmNrIiwiYSI6ImNqcjZoMHVtaTA0Nm80OW5zY3lqcmJtMjEifQ.TDeqQvgLyoP0CNO1WO6qmg',
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
                 '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox.streets'
-        }).addTo(newMap);
+        });
+        tile_layer.addTo(newMap);
+        tile_layer.on("load", function() {
+            console.log("all visible tiles have been loaded");
+            startComboBox();
+        });
+        // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
+        //     mapboxToken: 'pk.eyJ1IjoiY3NlZXZpbmNrIiwiYSI6ImNqcjZoMHVtaTA0Nm80OW5zY3lqcmJtMjEifQ.TDeqQvgLyoP0CNO1WO6qmg',
+        //     maxZoom: 18,
+        //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        //         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        //         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        //     id: 'mapbox.streets'
+        // }).addTo(newMap);
+        // .on("load", function () {
+        //     console.log("all visible tiles have been loaded")
+        // });
 
         updateRestaurants();
     }
@@ -162,6 +214,7 @@ createRestaurantHTML = (restaurant) => {
     image.className = 'restaurant-img';
     image.src = DBHelper.imageUrlForRestaurant(restaurant);
     li.append(image);
+    image.setAttribute('alt', 'photo of ' + restaurant.name + ' restaurant ')
 
     const name = document.createElement('h1');
     name.innerHTML = restaurant.name;
@@ -177,6 +230,7 @@ createRestaurantHTML = (restaurant) => {
 
     const more = document.createElement('a');
     more.innerHTML = 'View Details';
+    more.setAttribute('aria-label', 'Details of ' + restaurant.name);
     more.href = DBHelper.urlForRestaurant(restaurant);
     li.append(more)
 
