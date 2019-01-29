@@ -3,7 +3,6 @@ let neighborhoods;
 let cuisines;
 var newMap;
 var markers = [];
-const newCtrl = true;
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -12,15 +11,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
     initMap(); // added 
     fetchNeighborhoods();
     fetchCuisines();
-
-    // set listeners for input field changes 
-    document.getElementById('neighborhoodsInput').addEventListener("focusout", function(evt) {
-        updateRestaurants();
-    }, false);
-    document.getElementById('cuisinesInput').addEventListener("focusout", function(evt) {
-        updateRestaurants();
-    }, false);
 });
+
+// set listeners for input field changes 
+// for focusout and "enter" key events
+
+const neighborhoodsInput = document.getElementById('neighborhoodsInput');
+neighborhoodsInput.addEventListener("focusout", function(e) {
+    updateRestaurants();
+}, false);
+
+neighborhoodsInput.addEventListener("keyup", function(e) {
+    if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
+        updateRestaurants();
+    }
+}, false);
+
+const cuisinesInput = document.getElementById('cuisinesInput');
+cuisinesInput.addEventListener("focusout", function(e) {
+    updateRestaurants();
+}, false);
+
+cuisinesInput.addEventListener("keyup", function(e) {
+    if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
+        console.log('C event:' + e.keyCode);
+        updateRestaurants();
+    }
+}, false);
+
+setTimeout(function() {
+    startComboBox(); // initializre the combo boxes after 1 second
+}, 1000);
+
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -43,6 +65,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const parentUl = document.getElementById('neighborhoods-selector');
     neighborhoods.forEach(neighborhood => {
         const li = document.createElement('li');
+        // li.setAttribute("aria-labelledby", "neighborhoodsInput");
         li.setAttribute("role", "option");
         li.innerHTML = neighborhood;
         parentUl.appendChild(li);
@@ -70,6 +93,8 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     const parentUl = document.getElementById('cuisines-selector');
     cuisines.forEach(cuisine => {
         const li = document.createElement('li');
+        // aria-labelledby
+        // li.setAttribute("aria-labelledby", "cuisinesInput");
         li.setAttribute("role", "option");
         li.innerHTML = cuisine;
         parentUl.appendChild(li);
@@ -94,9 +119,6 @@ initMap = () => {
             id: 'mapbox.streets'
         });
         tile_layer.addTo(newMap);
-        tile_layer.on("load", function() {
-            startComboBox();
-        });
 
         updateRestaurants();
     }
@@ -117,26 +139,9 @@ initMap = () => {
  * Update page and map for current restaurants.
  */
 updateRestaurants = () => {
-    let neighborhood;
-    let cuisine;
-    if (newCtrl) {
-        neighborhood = document.getElementById('neighborhoodsInput').value;
-        cuisine = document.getElementById('cuisinesInput').value;
-    } else {
-        const cSelect = document.getElementById('cuisines-select');
-        const nSelect = document.getElementById('neighborhoods-select');
-        const cIndex = cSelect.selectedIndex;
-        const nIndex = nSelect.selectedIndex;
+    let neighborhood = document.getElementById('neighborhoodsInput').value;
+    let cuisine = document.getElementById('cuisinesInput').value;
 
-        cuisine = cSelect[cIndex].value;
-        neighborhood = nSelect[nIndex].value;
-    }
-    if (neighborhood == 'All Neighborhoods') {
-        neighborhood = 'all';
-    }
-    if (cuisine == 'All Cuisines') {
-        cuisine = 'all';
-    }
     DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
         if (error) { // Got an error!
             console.error(error);
@@ -187,7 +192,7 @@ createRestaurantHTML = (restaurant) => {
     li.append(image);
     image.setAttribute('alt', 'photo of ' + restaurant.name + ' restaurant ')
 
-    const name = document.createElement('h1');
+    const name = document.createElement('h3');
     name.innerHTML = restaurant.name;
     li.append(name);
 
@@ -198,6 +203,10 @@ createRestaurantHTML = (restaurant) => {
     const address = document.createElement('p');
     address.innerHTML = restaurant.address;
     li.append(address);
+
+    const address2 = document.createElement('p');
+    address2.innerHTML = restaurant.address2;
+    li.append(address2);
 
     const more = document.createElement('a');
     more.innerHTML = 'View Details';

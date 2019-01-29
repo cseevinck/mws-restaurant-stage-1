@@ -27,59 +27,38 @@
         </section>
 
         <!-- this is the target for skip -->
-        <div class="filter-container">
-            <h2>Filter Results</h2>
-            <section id="neighborhood-content">
-                <label>
-              <div class="filter-options">
-                <div class="widget input-container">
-                  <input type="text" size="25" role="combobox" value="All Neighborhoods" id="neighborhoodsInput">
-                      <div role="listbox" hidden tabindex="-1">
-                      <ul role="presentation" id="neighborhoods-selector">
-                        <li role="option">All Neighborhoods</li>
-                      </ul>
-                  </div>
-                </div>
-              </div>
-            </label>
-            </section>
-            <section id="cuisines-content">
-                <label>
-                  <div class="filter-options">
-                    <div class="widget input-container">
-                      <input type="text" size="25" role="combobox" value="All Cuisines" id="cuisinesInput">
-                      <div role="listbox" hidden tabindex="-1">
-                        <ul role="presentation" id="cuisines-selector">
-                          <li role="option">All Cuisines</li>
-                        </ul>
-                      </div>
+        <div id="content" class="filter-container">
+
+            <div class="filter-options">
+                <h2 aria-label="neighborhood and cuisine filters">Filter Results</h2>
+                <section id="neighborhood-content">
+                    <div class="input-container">
+                        <input type="text" size="25" class="input-box" aria-expanded="true" role="combobox" value="All Neighborhoods" id="neighborhoodsInput" aria-label="neighborhoodsInput">
+                        <div class="front" role="listbox" hidden tabindex="-1">
+                            <ul class="front" role="presentation" id="neighborhoods-selector">
+                                <li role="option">All Neighborhoods</li>
+                            </ul>
+                        </div>
                     </div>
-                  </div>            
-            </label>
-            </section>
-        </div>
-        <section>
-            <div class="restaurant-container">
-                <ul id="restaurants-list"></ul>
+                </section>
+                <section id="cuisines-content">
+                    <div class="input-container">
+                        <input type="text" size="25" class="input-box" aria-expanded="true" role="combobox" value="All Cuisines" id="cuisinesInput" aria-label="cuisinesInput">
+                        <div role="listbox" hidden tabindex="-1" id="cuisineslistbox">
+                            <ul role="presentation" id="cuisines-selector">
+                                <li role="option">All Cuisines</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </div>
+            <section>
+        </div>
+        <div class="restaurant-container">
+            <ul id="restaurants-list"></ul>
+        </div>
         </section>
 
-        <!-- <section>
-            <div class="filter-options">
-                <div class="filter-container">
-                    <h2>Filter Results</h2>
-                    <select id="neighborhoods-select" aria-label="Select restaurant neighborhood" name="neighborhoods" onchange="updateRestaurants()">
-                      <option value="all">All Neighborhoods</option>
-                     </select>
-                    <select id="cuisines-select" aria-label="Select cuisine type" name="cuisines" onchange="updateRestaurants()">
-                     <option value="all">All Cuisines</option>
-                     </select>
-                </div>
-            </div>
-            <div class="restaurant-container">
-                <ul id="restaurants-list"></ul>
-            </div>
-        </section> -->
     </main>
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
     <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
@@ -87,8 +66,7 @@
     <script type="application/javascript" charset="utf-8" src="js/combobox.js" "></script>
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap "></script> -->
 
-
-    <footer id="footer ">
+<footer id="footer " class="web-footer ">
         Copyright (c) 2017 <a href="/ "><strong>Restaurant Reviews</strong></a> All Rights Reserved.
     </footer>
 

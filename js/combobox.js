@@ -1,5 +1,5 @@
-// This code will only be called once all the map segments have been loaded. This is because the dom elements for
-// site need to be completed before this code can run.
+// This code will only be called once all the map segments have been loaded. This is because 
+// the dom elements for the site need to be completed before this code can run.
 
 function startComboBox() {
     // (function() {
@@ -16,12 +16,13 @@ function startComboBox() {
     var lastIdMod = [];
 
     /**
-     * Generate a unique DOM ID.
+     * Generate a unique DOM ID for the combobox selected by the index
+     * @param {boxIndex} index for the combobox
      * @return {string}
      */
-    function nextId(index) {
-        var id = lastIdMod[index] + LAST_ID[index];
-        LAST_ID[index]++;
+    function nextId(boxIndex) {
+        var id = lastIdMod[boxIndex] + LAST_ID[boxIndex];
+        LAST_ID[boxIndex]++;
         return id;
     }
 
@@ -30,6 +31,7 @@ function startComboBox() {
      * Implements a minimal combo box: a text field with a list of options which pops up when the text
      * field is focused.
      * Use arrow keys or mouse to choose from available options.
+     * @param {boxIndex} index for the combobox
      * @param {Element} el The text field element to decorate.
      * @param {Element} listEl The listbox element to associate with this text field; also decorates
      *     it with the `ListBox` pattern.
@@ -39,6 +41,13 @@ function startComboBox() {
         this.listbox = new ListBox(boxIndex, listEl, this);
         listEl.id = nextId(boxIndex);
 
+        // add the aria-owns attribute to the inout element under same parent
+        for (let node of listEl.parentNode.childNodes) {
+            if (node.nodeName == 'INPUT') {
+                node.setAttribute("aria-owns", listEl.id);
+                break;
+            };
+        }
         this.el.addEventListener('focus', this.handleFocus.bind(this), true);
         this.el.addEventListener('blur', this.handleBlur.bind(this), true);
         this.el.addEventListener('input', this.handleInput.bind(this));
@@ -118,6 +127,7 @@ function startComboBox() {
 
     /**
      * @constructor
+     * @param {boxIndex} index for the combobox
      * @param {Element} el The element to decorate as a listbox.
      * @param {Textbox} textbox The textbox which controls this listbox in a combobox pattern.
      */
@@ -244,15 +254,13 @@ function startComboBox() {
             this.textbox.setActiveDescendant(newActive);
         }
     };
-    // let keepGoing = true;
-
 
     var inputs = document.querySelectorAll('input[type=text]');
     var listboxes = document.querySelectorAll('[role=listbox]');
 
     for (let i = 0; i <= listboxes.length - 1; i++) {
         LAST_ID.push(0);
-        lastIdMod.push(':' + (i + 1) + ':'); // different id prefixes for each cpntrol
+        lastIdMod.push(':' + (i + 1) + ':'); // different id prefixes for each control
         new ComboBox(i, inputs[i], listboxes[i]);
     }
 }
