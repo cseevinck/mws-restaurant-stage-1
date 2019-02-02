@@ -263,6 +263,7 @@ nav h1 a {
 .main-restaurants-container {
     border: 1px solid silver;
     justify-content: center;
+    width: 100%;
 }
 
 #restaurants-list {
@@ -271,6 +272,7 @@ nav h1 a {
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
+    width: auto;
 }
 
 #restaurants-list li {

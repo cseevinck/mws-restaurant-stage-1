@@ -12,6 +12,7 @@
         }
         #restaurants-list li {
             width: 80%;
+            width: auto;
         }
     }
     
@@ -21,6 +22,7 @@
         }
         #restaurants-list {
             width: 90%;
+            width: auto;
         }
         #restaurants-list li {
             width: 45%;
@@ -36,6 +38,7 @@
     @media screen and (min-width: 900px) {
         #restaurants-list {
             width: 90%;
+            width: auto;
         }
         #restaurants-list li {
             width: 30%;
@@ -64,6 +67,7 @@
     @media screen and (min-width: 1200px) {
         #restaurants-list {
             width: 1150px;
+            width: auto;
         }
         #restaurants-list li {
             width: 265px;
