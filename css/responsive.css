@@ -31,9 +31,6 @@
         #restaurant-hours td {
             font-size: 12pt;
         }
-        #restaurant-address {
-            font-size: 14pt;
-        }
     }
     
     @media screen and (min-width: 900px) {
@@ -49,8 +46,18 @@
         #restaurant-hours td {
             font-size: 14pt;
         }
-        #restaurant-address {
-            font-size: 16pt;
+        table {
+            margin: 0 0;
+        }
+        #restaurant-container {
+            display: flex;
+            flex-direction: row;
+        }
+        .rest-image-container {
+            width: 45%;
+        }
+        .rest-details-container {
+            width: 45%;
         }
     }
     

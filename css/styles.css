@@ -258,12 +258,10 @@ nav h1 a {
 }
 
 
-/* ====================== Restaurant Listing ====================== */
+/* ====================== Front Page Restaurant Listing ====================== */
 
-.restaurant-container {
+.main-restaurants-container {
     border: 1px solid silver;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -305,9 +303,6 @@ nav h1 a {
     border: 1px solid #6B3B03;
 }
 
-
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
 #restaurants-list li h1 {
     color: #6B3B03;
     font-family: Arial, sans-serif;
@@ -340,11 +335,41 @@ nav h1 a {
 
 /* ====================== Restaurant Details ====================== */
 
-.rest-review-container {
+table {
+    margin: 0 auto;
+}
+
+#restaurant-hours td {
+    color: #666;
+}
+
+#restaurant-container {
     display: flex;
+    flex-direction: column;
+    /* flex-direction: row; */
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    width: 100%;
+    padding-top: 2em;
+}
+
+.rest-image-container {
+    background-color: #f3f3f3;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    width: 85%;
+}
+
+.rest-details-container {
+    background-color: #f3f3f3;
+    /* display: flex; */
+    flex-wrap: wrap;
+    text-align: left;
+    justify-content: center;
+    align-self: center;
+    width: 85%;
 }
 
 .inside header {
@@ -369,22 +394,31 @@ nav h1 a {
 #restaurant-name {
     color: #6B3B03;
     font-family: Arial, sans-serif;
-    font-size: 30pt;
+    font-size: 24pt;
     font-weight: 200;
     letter-spacing: 0;
     margin: 15px 0 30px;
     text-transform: uppercase;
     line-height: 1.1;
+    text-align: center;
 }
 
 #restaurant-img {
     width: 85%;
+    height: 85%;
     border-radius: 20px 0 0 0;
 }
 
 #restaurant-address {
-    font-size: 12pt;
-    margin: 10px 0px;
+    color: #6B3B03;
+    font-family: Arial, sans-serif;
+    font-size: 20pt;
+    font-weight: 200;
+    letter-spacing: 0;
+    margin: 15px 0 30px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-align: center;
 }
 
 #restaurant-cuisine {
@@ -401,32 +435,23 @@ nav h1 a {
     border-radius: 0 0 20px 0;
 }
 
-#restaurant-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding-top: 2em;
-}
-
 #reviews-container {
     border-bottom: 1px solid #d9d9d9;
     border-top: 1px solid #fff;
-    width: 100%;
     padding-top: 2em;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 #reviews-container h3 {
-    color: color: #6B3B03;
+    color: #6B3B03;
+    font-family: Arial, sans-serif;
     font-size: 24pt;
-    font-weight: 300;
-    letter-spacing: -1px;
-    padding-bottom: 1pt;
+    font-weight: 200;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-align: center;
 }
 
 #reviews-list {
@@ -495,8 +520,4 @@ nav h1 a {
 
 #reviews-list li p {
     margin: 10px;
-}
-
-#restaurant-hours td {
-    color: #666;
 }

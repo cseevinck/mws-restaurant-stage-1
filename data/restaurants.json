@@ -12,13 +12,13 @@
         },
         "cuisine_type": "Asian",
         "operating_hours": {
-            "Monday": "5:30 pm - 11:00 pm",
-            "Tuesday": "5:30 pm - 12:00 am",
-            "Wednesday": "5:30 pm - 12:00 am",
-            "Thursday": "5:30 pm - 12:00 am",
-            "Friday": "5:30 pm - 12:00 am",
-            "Saturday": "12:00 pm - 4:00 pm, 5:30 pm - 12:00 am",
-            "Sunday": "12:00 pm - 4:00 pm, 5:30 pm - 11:00 pm"
+            "Mon.  ": "5:30pm-11:00pm",
+            "Tues. ": "5:30pm-12:00am",
+            "Wed.  ": "5:30pm-12:00am",
+            "Thurs.": "5:30pm-12:00am",
+            "Fri.  ": "5:30pm-12:00am",
+            "Sat.  ": "12:00pm-4:00pm, 5:30pm-12:00am",
+            "Sun.  ": "12:00pm-4:00pm, 5:30pm-11:00 pm"
         },
         "reviews": [{
                 "name": "Steve",
