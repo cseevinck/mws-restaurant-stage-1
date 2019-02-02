@@ -5,13 +5,13 @@ function startComboBox() {
     // (function() {
     'use strict';
     // Define values for keycodes
-    var VK_ENTER = 13;
-    var VK_ESC = 27;
-    var VK_SPACE = 32;
-    var VK_LEFT = 37;
-    var VK_UP = 38;
-    var VK_RIGHT = 39;
-    var VK_DOWN = 40;
+    const VK_ENTER = 13;
+    const VK_ESC = 27;
+    const VK_SPACE = 32;
+    const VK_LEFT = 37;
+    const VK_UP = 38;
+    const VK_RIGHT = 39;
+    const VK_DOWN = 40;
     var LAST_ID = [];
     var lastIdMod = [];
 
@@ -205,14 +205,14 @@ function startComboBox() {
         },
 
         handleHoverOnItem: function(e) {
-            var newIdx = this.visibleItems.indexOf(e.target);
+            const newIdx = this.visibleItems.indexOf(e.target);
             if (newIdx < 0)
                 return;
             this.changeActiveListitem(newIdx);
         },
 
         handleClickOnItem: function(e) {
-            var item = e.target;
+            const item = e.target;
             if (this.items.indexOf(item) < 0)
                 return;
             this.textbox.setSelected(item);

@@ -1,3 +1,13 @@
+// Make sure Service Workers are supported
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register('../sw_for_cache.js')
+            .then(reg => console.log('Service Worker: Registered'))
+            .catch(err => console.log(`Service Worker: Error: ${err}`));
+    });
+}
+
 let restaurants;
 let neighborhoods;
 let cuisines;
@@ -19,6 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 const neighborhoodsInput = document.getElementById('neighborhoodsInput');
 neighborhoodsInput.addEventListener("focusout", function(e) {
     updateRestaurants();
+
 }, false);
 
 neighborhoodsInput.addEventListener("keyup", function(e) {
@@ -34,13 +45,12 @@ cuisinesInput.addEventListener("focusout", function(e) {
 
 cuisinesInput.addEventListener("keyup", function(e) {
     if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
-        console.log('C event:' + e.keyCode);
         updateRestaurants();
     }
 }, false);
 
 setTimeout(function() {
-    startComboBox(); // initializre the combo boxes after 1 second
+    startComboBox(); // initialize the combo boxes after 1 second
 }, 1000);
 
 
@@ -65,7 +75,6 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const parentUl = document.getElementById('neighborhoods-selector');
     neighborhoods.forEach(neighborhood => {
         const li = document.createElement('li');
-        // li.setAttribute("aria-labelledby", "neighborhoodsInput");
         li.setAttribute("role", "option");
         li.innerHTML = neighborhood;
         parentUl.appendChild(li);
@@ -93,8 +102,6 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     const parentUl = document.getElementById('cuisines-selector');
     cuisines.forEach(cuisine => {
         const li = document.createElement('li');
-        // aria-labelledby
-        // li.setAttribute("aria-labelledby", "cuisinesInput");
         li.setAttribute("role", "option");
         li.innerHTML = cuisine;
         parentUl.appendChild(li);
