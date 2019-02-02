@@ -1,10 +1,14 @@
-// Make sure Service Workers are supported
+// Register service worker if supported
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register('../sw_for_cache.js')
-            .then(reg => console.log('Service Worker: Registered'))
-            .catch(err => console.log(`Service Worker: Error: ${err}`));
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', reg.scope);
+            }).catch(err => {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
     });
 }
 
@@ -25,7 +29,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // set listeners for input field changes 
 // for focusout and "enter" key events
-
 const neighborhoodsInput = document.getElementById('neighborhoodsInput');
 neighborhoodsInput.addEventListener("focusout", function(e) {
     updateRestaurants();
@@ -112,35 +115,23 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
-        self.newMap = L.map('map', {
-            center: [40.722216, -73.987501],
-            zoom: 12,
-            scrollWheelZoom: false
-        });
-        let tile_layer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-            mapboxToken: 'pk.eyJ1IjoiY3NlZXZpbmNrIiwiYSI6ImNqcjZoMHVtaTA0Nm80OW5zY3lqcmJtMjEifQ.TDeqQvgLyoP0CNO1WO6qmg',
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: 'mapbox.streets'
-        });
-        tile_layer.addTo(newMap);
-
-        updateRestaurants();
-    }
-    /* window.initMap = () => {
-      let loc = {
-        lat: 40.722216,
-        lng: -73.987501
-      };
-      self.map = new google.maps.Map(document.getElementById('map'), {
+    self.newMap = L.map('map', {
+        center: [40.722216, -73.987501],
         zoom: 12,
-        center: loc,
-        scrollwheel: false
-      });
-      updateRestaurants();
-    } */
+        scrollWheelZoom: false
+    });
+    let tile_layer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
+        mapboxToken: 'pk.eyJ1IjoiY3NlZXZpbmNrIiwiYSI6ImNqcjZoMHVtaTA0Nm80OW5zY3lqcmJtMjEifQ.TDeqQvgLyoP0CNO1WO6qmg',
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox.streets'
+    });
+    tile_layer.addTo(newMap);
+
+    updateRestaurants();
+}
 
 /**
  * Update page and map for current restaurants.
@@ -228,25 +219,14 @@ createRestaurantHTML = (restaurant) => {
  * Add markers for current restaurants to the map.
  */
 addMarkersToMap = (restaurants = self.restaurants) => {
-        restaurants.forEach(restaurant => {
-            // Add marker to the map
-            const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
-            marker.on("click", onClick);
-
-            function onClick() {
-                window.location.href = marker.options.url;
-            }
-            self.markers.push(marker);
-        });
-
-    }
-    /* addMarkersToMap = (restaurants = self.restaurants) => {
-      restaurants.forEach(restaurant => {
+    restaurants.forEach(restaurant => {
         // Add marker to the map
-        const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-        google.maps.event.addListener(marker, 'click', () => {
-          window.location.href = marker.url
-        });
+        const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
+        marker.on("click", onClick);
+
+        function onClick() {
+            window.location.href = marker.options.url;
+        }
         self.markers.push(marker);
-      });
-    } */
+    });
+}
