@@ -1,3 +1,5 @@
+console.log('window.location.hostname:', window.location.hostname)
+let githubHosted = (window.location.hostname === "cseevinck.github.io") ? 'true' : '';
 // let githubHosted = (window.location.hostname === "githubname.github.io") ? 'true' : '';
 // https: //cseevinck.github.io/mws-restaurant-stage-1/
 /**
@@ -169,7 +171,7 @@ class DBHelper {
      * Restaurant image URL.
      */
     static imageUrlForRestaurant(restaurant) {
-        return (`/img/${restaurant.photograph}`);
+        return (`./img/${restaurant.photograph}`);
     }
 
     /**
@@ -197,4 +199,3 @@ class DBHelper {
         } */
 
 }
-let githubHosted = (window.location.hostname === "cseevinck.github.io") ? 'true' : '';
