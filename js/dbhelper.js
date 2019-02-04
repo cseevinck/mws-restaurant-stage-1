@@ -13,7 +13,6 @@ class DBHelper {
         const port = 8000 // Change this to your server port
 
         if (githubHosted) {
-            console.log(window.location.hostname);
             return `https://cseevinck.github.io/mws-restaurant-stage-1/data/restaurants.json`
         }
         return `http://localhost:${port}/data/restaurants.json`;
