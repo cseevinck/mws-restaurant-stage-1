@@ -60,7 +60,7 @@
     
     @media screen and (min-width: 1200px) {
         #restaurants-list {
-            width: 1150px;
+            max-width: 1150px;
             width: auto;
         }
         #restaurants-list li {
