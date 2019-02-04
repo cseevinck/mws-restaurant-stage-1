@@ -6,8 +6,6 @@ const urlsToCache = [
     '/',
     '/index.html',
     'css/responsive.css',
-    'css/combobox.css',
-    'js/combobox.js',
     '/restaurant.html',
     '/restaurant.html?id=1',
     '/restaurant.html?id=2',
@@ -78,6 +76,7 @@ self.addEventListener('fetch', event => {
 
             // Fetch it from the network
             return fetch(event.request).then(response => {
+
                 // It wasn't found in the cache, add it now
                 return caches.open(cacheFile).then(cache => {
                     cache.put(event.request, response.clone());

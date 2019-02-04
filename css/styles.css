@@ -214,39 +214,19 @@ nav h1 a {
     padding: 1em;
 }
 
-.front {
-    z-index: 9999;
-}
-
-.input-box {
-    font-size: 11pt;
-    border-style: solid;
-    border-color: white;
-}
-
-.input-container {
-    position: relative;
+.filter-options select {
     background-color: white;
-    border: 1px solid #fff;
+    border: 2px solid gray;
     font-family: Arial, sans-serif;
-    font-size: 11pt;
-    letter-spacing: 0;
-    margin: 5px 5px 5px;
-    padding: 0;
-    width: 230px;
-    border-radius: 5px;
+    font-size: 1.1em;
+    height: 30px;
+    margin: 10px;
+    width: 200px;
 }
 
-.input-container li {
-    background-color: white;
-    width: 120px;
-}
-
-.input-container:after {
-    position: absolute;
-    right: 5px;
-    top: 0;
-    content: "\25be";
+.filter-options select:hover {
+    background-color: rgb(221, 221, 221);
+    color: #050505;
 }
 
 .filter-options h2 {
@@ -261,9 +241,9 @@ nav h1 a {
 /* ====================== Front Page Restaurant Listing ====================== */
 
 .main-restaurants-container {
-    border: 1px solid silver;
-    justify-content: center;
+    margin: auto;
     width: 100%;
+    max-width: 1200px;
 }
 
 #restaurants-list {
@@ -332,6 +312,11 @@ nav h1 a {
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+#restaurants-list li a:hover {
+    background-color: rgb(53, 29, 2);
+    color: #ffffff;
 }
 
 
@@ -441,8 +426,10 @@ table {
     border-bottom: 1px solid #d9d9d9;
     border-top: 1px solid #fff;
     padding-top: 2em;
+    margin: auto;
     justify-content: center;
     align-items: center;
+    width: 90%;
 }
 
 #reviews-container h3 {
@@ -463,18 +450,7 @@ table {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-#reviews-list li {
-    background-color: #fff;
-    border: 2px solid #f3f3f3;
-    display: block;
     list-style-type: none;
-    margin: 0 0 30px;
-    overflow: hidden;
-    position: relative;
-    width: 85%;
-    border-radius: 20px 0 20px 0;
 }
 
 #date-name {
@@ -497,10 +473,6 @@ table {
     font-size: 1.1em;
 }
 
-.rating-comments {
-    padding: 0 1em;
-}
-
 .rating-comments h5 {
     padding: 2px;
     background-color: #6B3B03;
@@ -510,16 +482,4 @@ table {
     letter-spacing: 1px;
     margin: 10px;
     font-size: 1em;
-}
-
-.rating-name h4 {
-    padding: 2px;
-    color: white;
-    letter-spacing: 1px;
-    margin: 10px;
-    font-size: 1em;
-}
-
-#reviews-list li p {
-    margin: 10px;
 }

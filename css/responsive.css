@@ -7,9 +7,6 @@
         #restaurants-list {
             width: 80%;
         }
-        .filter-options h2 {
-            margin: 5px 0 5px;
-        }
         #restaurants-list li {
             width: 80%;
             width: auto;
@@ -26,9 +23,6 @@
         }
         #restaurants-list li {
             width: 45%;
-        }
-        #reviews-list li p {
-            font-size: 12pt;
         }
         #restaurant-hours td {
             font-size: 12pt;
