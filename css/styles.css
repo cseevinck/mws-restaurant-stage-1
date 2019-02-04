@@ -453,19 +453,19 @@ table {
     list-style-type: none;
 }
 
-#date-name {
+.date-name {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: #252831;
 }
 
-#date-name p {
+.date-name p {
     color: white;
     padding-right: 1em;
 }
 
-#date-name h4 {
+.date-name h4 {
     color: white;
     margin: 10px;
     font-weight: normal;

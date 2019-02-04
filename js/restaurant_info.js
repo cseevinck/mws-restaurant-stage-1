@@ -151,7 +151,8 @@ createReviewHTML = (review) => {
     const li = document.createElement('li');
 
     const div1 = document.createElement('div');
-    div1.setAttribute('id', 'date-name');
+    // div1.setAttribute('id', 'date-name');
+    div1.className = 'date-name';
 
     const name = document.createElement('h4');
     name.innerHTML = review.name;
