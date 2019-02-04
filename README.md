@@ -29,6 +29,9 @@ In a terminal from inside the project directory, check the version of Python you
 
 With the server running, access the site in a web browser at: http://localhost:8000
 
+## Issues
+- I cannot figure out how to get favicon to work with the SimpleHTTPServer in hosted site. 
+
 ## Credits
 References: stackoverflow.com, w3schools.com, Youtube.com, developer.mozilla.org, css-tricks.com, Udacity lectures, javascript.info, geeksforgeeks.org, and other sites I found online.
 
