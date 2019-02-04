@@ -1,5 +1,3 @@
-console.log('window.location.hostname:', window.location.hostname)
-let githubHosted = (window.location.hostname === "cseevinck.github.io") ? 'true' : '';
 // let githubHosted = (window.location.hostname === "githubname.github.io") ? 'true' : '';
 // https: //cseevinck.github.io/mws-restaurant-stage-1/
 /**
@@ -199,3 +197,4 @@ class DBHelper {
         } */
 
 }
+let githubHosted = (window.location.hostname === "cseevinck.github.io") ? 'true' : '';
