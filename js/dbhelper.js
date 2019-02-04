@@ -1,6 +1,11 @@
+console.log('window.location.hostname:', window.location.hostname)
+let githubHosted = (window.location.hostname === "cseevinck.github.io") ? 'true' : '';
+// let githubHosted = (window.location.hostname === "githubname.github.io") ? 'true' : '';
+// https: //cseevinck.github.io/mws-restaurant-stage-1/
 /**
  * Common database helper functions.
  */
+
 class DBHelper {
 
     /**
@@ -9,8 +14,22 @@ class DBHelper {
      */
     static get DATABASE_URL() {
         const port = 8000 // Change this to your server port
+
+        if (githubHosted) {
+            console.log(window.location.hostname);
+            return `https://cseevinck.github.io/mws-restaurant-stage-1/data/restaurants.json`
+                // return `https://githubname.github.io/mws-restaurant-review-app-stage-1/data/restaurants.json`
+        }
         return `http://localhost:${port}/data/restaurants.json`;
     }
+
+
+
+
+    // static get DATABASE_URL() {
+    //     const port = 8000 // Change this to your server port
+    //     return `http://localhost:${port}/data/restaurants.json`;
+    // }
 
     /**
      * Fetch all restaurants.
