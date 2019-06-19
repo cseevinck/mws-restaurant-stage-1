@@ -15,7 +15,11 @@ class DBHelper {
         if (githubHosted) {
             return `https://cseevinck.github.io/mws-restaurant-stage-1/data/restaurants.json`
         }
-        return `http://localhost:${port}/data/restaurants.json`;
+        // This is for localhost
+        // return `http://localhost:${port}/data/restaurants.json`;
+
+        // this is for web server
+        return `http://chs-webs.com/demos/restaurant-reviews/data/restaurants.json`;
     }
 
     /**
