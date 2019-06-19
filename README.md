@@ -29,6 +29,8 @@ In a terminal from inside the project directory, check the version of Python you
 
 With the server running, access the site in a web browser at: http://localhost:8000
 
+To run this app on GitHub, click https://cseevinck.github.io/mws-restaurant-stage-1/ 
+
 ## Issues
 - I cannot figure out how to get favicon to work with the SimpleHTTPServer in hosted site. 
 
